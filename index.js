@@ -10,7 +10,7 @@ const jwtKey = "social-app";
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const connection = mysql.createPool({
   host: "localhost",
