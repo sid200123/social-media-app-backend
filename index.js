@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 var storage = multer.diskStorage({
   destination: (req, file, callBack) => {
-    callBack(null, "images"); // './public/images/' directory name where save the file
+    callBack(null, "./profile"); // './public/images/' directory name where save the file
   },
   filename: (req, file, callBack) => {
     callBack(
@@ -95,7 +95,7 @@ app.post("/login", async (req, resp) => {
   });
 });
 
-app.put("/updateProfile", upload.single("profile"), async (req, resp) => {
+app.put("/updateProfile", async (req, resp) => {
   connection.getConnection((err, conn) => {
     if (err) throw err;
     console.log(`connected as ${conn.threadId}`);
@@ -108,11 +108,7 @@ app.put("/updateProfile", upload.single("profile"), async (req, resp) => {
         conn.release();
         if (err) throw err;
         else {
-          if (err) {
-            resp.send("Something Went Wrong Please Try Again");
-          } else {
-            resp.send({ data: res });
-          }
+          resp.send({ res });
         }
       }
     );
